@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script>
+			window.onload=function(){
+				showtime();
+				showleft();
+				
+			}
+			function showtime(){
+				var mydate=new Date();
+				var y=mydate.getFullYear();
+				var m=mydate.getMonth()+1;
+				var D=mydate.getDate();
+				var d=mydate.getDay();
+				var h=mydate.getHours();
+				var M=mydate.getMinutes();
+				var s=mydate.getSeconds();
+				M=checktime(M);
+				s=checktime(s);
+				var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+				var a;
+				a=document.getElementById("b");
+				a.innerHTML=y+"年"+m+"月"+D+"日"+weekday[d]+h+":"+M+":"+s;
+				setTimeout(showtime,1000);
+			}
+			function checktime(i){
+				if(i<10){
+					i="0"+i;
+				}
+				return i;
+			}
+			function showleft(){
+			var end= new Date("2017,6,6"); 
+			//console.log(end.getMonth());
+		　　var now = new Date();    
+//			console.log(end.getTime());
+		　　var left = Math.ceil((end.getTime() - now.getTime())/(1000 * 60 * 60 * 24));
+//			console.log(left);
+			document.getElementById("timeShow").innerHTML=left;
+			}
+			
+			function left(){
+				var end1=new Date("2017/3/14,18:20:00");
+				var now1=new Date();
+				var left1=parseInt((end1.getTime()-now1.getTime())/1000);
+				var d1=parseInt(left1/(24*60*60));
+				var h1=parseInt(left1/(60*60)%24);
+				var m1=parseInt(left1/60%60);
+				var s1=parseInt(left1%60)
+				m1=checktime(m1);
+				s1=checktime(s1);
+				document.getElementById("left").innerHTML=d1+"日"+h1+"小时"+m1+"分"+s1+"秒";
+				if(left1<0){
+					document.getElementById("d").innerHTML="团购结束";
+					clearInterval(sh);
+				}
+			}
+			var sh;
+			sh=setInterval(left,1000);
+	</script>
+	</head>
+	<body>
+		<p id="b"></p>
+		<p id="c">距离2015年研究生考试时间还有<span  id="timeShow"></span>天</p>
+		
+		<p id="d">还剩<span id="left"></span></p>
+	</body>
+</html>
